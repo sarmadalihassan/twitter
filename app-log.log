@@ -1,0 +1,187 @@
+2022-09-08 14:37:38 [Twitter] error: Error: data and salt arguments required
+    at Object.hash (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:137:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.hash (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:133:25)
+    at exports.signUp (/home/sarmad/Documents/Twitter/controllers/user.js:26:35)
+2022-09-08 14:41:11 [Twitter] error: Error: data and salt arguments required
+    at Object.hash (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:137:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.hash (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:133:25)
+    at exports.signUp (/home/sarmad/Documents/Twitter/controllers/user.js:26:35)
+2022-09-08 14:42:13 [Twitter] error: Error: data and salt arguments required
+    at Object.hash (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:137:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.hash (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:133:25)
+    at exports.signUp (/home/sarmad/Documents/Twitter/controllers/user.js:26:35)
+2022-09-08 14:43:10 [Twitter] error: Error: data and salt arguments required
+    at Object.hash (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:137:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.hash (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:133:25)
+    at exports.signUp (/home/sarmad/Documents/Twitter/controllers/user.js:28:35)
+2022-09-08 14:43:39 [Twitter] error: ValidationError: User validation failed: joiningDate: Path `joiningDate` is required.
+    at Document.invalidate (/home/sarmad/Documents/Twitter/node_modules/mongoose/lib/document.js:3054:32)
+    at /home/sarmad/Documents/Twitter/node_modules/mongoose/lib/document.js:2842:17
+    at /home/sarmad/Documents/Twitter/node_modules/mongoose/lib/schematype.js:1349:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:77:11)
+2022-09-08 21:09:47 [Twitter] error: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at new NodeError (node:internal/errors:387:5)
+    at ServerResponse.setHeader (node:_http_outgoing:603:11)
+    at ServerResponse.header (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:794:10)
+    at ServerResponse.send (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:174:12)
+    at ServerResponse.json (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:278:15)
+    at ServerResponse.send (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:162:21)
+    at exports.editUser (/home/sarmad/Documents/Twitter/controllers/user.js:89:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-08 21:09:52 [Twitter] error: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at new NodeError (node:internal/errors:387:5)
+    at ServerResponse.setHeader (node:_http_outgoing:603:11)
+    at ServerResponse.header (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:794:10)
+    at ServerResponse.send (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:174:12)
+    at ServerResponse.json (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:278:15)
+    at ServerResponse.send (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:162:21)
+    at exports.editUser (/home/sarmad/Documents/Twitter/controllers/user.js:89:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:08:54 [Twitter] error: TypeError: Cannot read properties of undefined (reading 'id')
+    at exports.postTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:12:37)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:22:26 [Twitter] error: TypeError: user.followers is not iterable
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:25:20)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:23:11 [Twitter] error: TypeError: user.followers is not iterable
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:27:20)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:24:17 [Twitter] error: TypeError: user.followers is not iterable
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:27:20)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:32:53 [Twitter] error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:1150:12)
+    at ServerResponse.json (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:271:14)
+    at ServerResponse.send (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:162:21)
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:37:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:33:10 [Twitter] error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:1150:12)
+    at ServerResponse.json (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:271:14)
+    at ServerResponse.send (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:162:21)
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:37:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:33:43 [Twitter] error: TypeError: Cannot read properties of null (reading 'followers')
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:25:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:34:09 [Twitter] error: TypeError: Cannot read properties of null (reading 'followers')
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:25:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:34:52 [Twitter] error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:1150:12)
+    at ServerResponse.json (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:271:14)
+    at ServerResponse.send (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:162:21)
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:37:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:35:44 [Twitter] error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:1150:12)
+    at ServerResponse.json (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:271:14)
+    at ServerResponse.send (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:162:21)
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:37:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:36:20 [Twitter] error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:1150:12)
+    at ServerResponse.json (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:271:14)
+    at ServerResponse.send (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:162:21)
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:37:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:36:37 [Twitter] error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:1150:12)
+    at ServerResponse.json (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:271:14)
+    at ServerResponse.send (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:162:21)
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:37:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:37:44 [Twitter] error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:1150:12)
+    at ServerResponse.json (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:271:14)
+    at ServerResponse.send (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:162:21)
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:38:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:40:04 [Twitter] error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:1150:12)
+    at ServerResponse.json (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:271:14)
+    at ServerResponse.send (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:162:21)
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:37:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:41:35 [Twitter] error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:1150:12)
+    at ServerResponse.json (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:271:14)
+    at ServerResponse.send (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:162:21)
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:37:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 11:42:39 [Twitter] error: TypeError: Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
+    at JSON.stringify (<anonymous>)
+    at stringify (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:1150:12)
+    at ServerResponse.json (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:271:14)
+    at ServerResponse.send (/home/sarmad/Documents/Twitter/node_modules/express/lib/response.js:162:21)
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:37:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 12:47:21 [Twitter] error: CastError: Cast to ObjectId failed for value "own" (type string) at path "_id" for model "Tweet"
+    at model.Query.exec (/home/sarmad/Documents/Twitter/node_modules/mongoose/lib/query.js:4884:21)
+    at Query.then (/home/sarmad/Documents/Twitter/node_modules/mongoose/lib/query.js:4983:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-10 12:49:18 [Twitter] error: CastError: Cast to ObjectId failed for value "own" (type string) at path "_id" for model "Tweet"
+    at model.Query.exec (/home/sarmad/Documents/Twitter/node_modules/mongoose/lib/query.js:4884:21)
+    at Query.then (/home/sarmad/Documents/Twitter/node_modules/mongoose/lib/query.js:4983:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

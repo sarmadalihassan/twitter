@@ -109,3 +109,5 @@ exports.repostTweet = async (req, res) => {
 
   return res.status(200).send(tweet);
 };
+
+exports.getExplorePage = async (req, res) => {};

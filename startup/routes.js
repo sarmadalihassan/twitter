@@ -5,6 +5,7 @@ const requestIp = require("request-ip");
 const cors = require("cors");
 const userRoutes = require("../routes/user");
 const tweetRoutes = require("../routes/tweet");
+const morgan = require("morgan");
 
 // const corsOptions = {
 //   allowedHeaders: [
@@ -26,6 +27,7 @@ module.exports = function (app) {
   // app.use(cors(corsOptions));
   // app.options('*', cors());
   app.use(cors());
+  app.use(morgan("tiny"));
   // app.use(cookieParser());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json({ limit: "10mb" })); //for base64 images, yeah i know it doesn't scale but we don't need to...

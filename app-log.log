@@ -185,3 +185,47 @@
     at model.Query.exec (/home/sarmad/Documents/Twitter/node_modules/mongoose/lib/query.js:4884:21)
     at Query.then (/home/sarmad/Documents/Twitter/node_modules/mongoose/lib/query.js:4983:15)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-11 15:12:56 [Twitter] error: SyntaxError: Unexpected token o in JSON at position 1
+    at JSON.parse (<anonymous>)
+    at parse (/home/sarmad/Documents/Twitter/node_modules/body-parser/lib/types/json.js:89:19)
+    at /home/sarmad/Documents/Twitter/node_modules/body-parser/lib/read.js:128:18
+    at AsyncResource.runInAsyncScope (node:async_hooks:203:9)
+    at invokeCallback (/home/sarmad/Documents/Twitter/node_modules/raw-body/index.js:231:16)
+    at done (/home/sarmad/Documents/Twitter/node_modules/raw-body/index.js:220:7)
+    at IncomingMessage.onEnd (/home/sarmad/Documents/Twitter/node_modules/raw-body/index.js:280:7)
+    at IncomingMessage.emit (node:events:513:28)
+    at endReadableNT (node:internal/streams/readable:1359:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+2022-09-11 15:15:35 [Twitter] error: TypeError: Cannot read properties of null (reading 'following')
+    at exports.getHomePage (/home/sarmad/Documents/Twitter/controllers/tweet.js:52:53)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-11 15:15:49 [Twitter] error: TypeError: Cannot read properties of null (reading 'privacy')
+    at exports.getTweet (/home/sarmad/Documents/Twitter/controllers/tweet.js:24:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-11 15:16:26 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:71:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-11 15:16:36 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:71:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-11 15:16:48 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:71:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-11 15:18:06 [Twitter] error: TypeError: Cannot read properties of null (reading 'following')
+    at exports.getHomePage (/home/sarmad/Documents/Twitter/controllers/tweet.js:52:53)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

@@ -8,15 +8,16 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const { DateTime } = require("luxon");
 const mongoose = require("mongoose");
-const { Tweet } = require("../models/tweet");
 
 exports.signUp = async (req, res) => {
+  console.log(req.body);
   try {
     req.body = await userSchema.validateAsync(req.body, { abortEarly: false });
   } catch (error) {
     return res.status(400).send(error.details);
   }
 
+  // console.log("hii bros!");
   let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User already registered.");
 
@@ -35,7 +36,7 @@ exports.signUp = async (req, res) => {
 
   const token = user.generateAuthToken();
 
-  return res.status(200).send(token);
+  return res.status(200).header("x-auth-token", token).send(user);
 };
 
 exports.getUser = async (req, res) => {
@@ -70,7 +71,7 @@ exports.loginUser = async (req, res) => {
 
   const token = user.generateAuthToken();
 
-  return res.status(200).send(token);
+  return res.status(200).header("x-auth-token", token).send(user);
 };
 
 exports.editUser = async (req, res) => {

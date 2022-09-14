@@ -1,6 +1,7 @@
-const { Tweet, tweetSchema } = require("../models/tweet");
-const { User, userSchema } = require("../models/user");
+const { Tweet, tweetSchema, replySchema } = require("../models/tweet");
+const { User } = require("../models/user");
 const mongoose = require("mongoose");
+const { DateTime } = require("luxon");
 
 exports.postTweet = async (req, res) => {
   try {
@@ -11,6 +12,7 @@ exports.postTweet = async (req, res) => {
 
   let tweet = new Tweet(req.body);
   tweet.user = req.user._id;
+  tweet.postedAt = DateTime.now();
   await tweet.save();
 
   return res.status(200).send(tweet);
@@ -52,4 +54,58 @@ exports.getHomePage = async (req, res) => {
   if (tweets.length == 0) return res.status(400).send("No Tweets found!");
 
   return res.status(200).send(tweets);
+};
+
+exports.postTweetReply = async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(400).send(`Invalid tweet id:${req.params.id}`);
+
+  let tweet = await Tweet.findById(req.params.id);
+
+  if (!tweet)
+    return res.status(400).send(`No tweet found with id:${req.params.id}`);
+
+  try {
+    req.body = await replySchema.validateAsync(req.body);
+  } catch (error) {
+    return res.status(400).send(error.details);
+  }
+
+  tweet.replies.push(req.body);
+
+  await tweet.save();
+
+  return res.status(200).send(tweet);
+};
+
+exports.likeTweet = async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(400).send(`Invalid tweet id:${req.params.id}`);
+
+  let tweet = await Tweet.findById(req.params.id);
+
+  if (!tweet)
+    return res.status(400).send(`No tweet found with id:${req.params.id}`);
+
+  tweet.likes.push(req.user._id);
+
+  await tweet.save();
+
+  return res.status(200).send(tweet);
+};
+
+exports.repostTweet = async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(400).send(`Invalid tweet id:${req.params.id}`);
+
+  let tweet = await Tweet.findById(req.params.id);
+
+  if (!tweet)
+    return res.status(400).send(`No tweet found with id:${req.params.id}`);
+
+  tweet.reposts.push(req.user._id);
+
+  await tweet.save();
+
+  return res.status(200).send(tweet);
 };

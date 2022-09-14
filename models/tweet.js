@@ -10,12 +10,10 @@ let tweetSchema = new mongoose.Schema({
     maxlength: 280
   },
   privacy: {
-    type: String,
-    required: true
+    type: String
   },
   whoCanReply: {
-    type: String,
-    required: true
+    type: String
   },
   mentioned: {
     type: [mongoose.Schema.Types.ObjectId],
@@ -30,6 +28,22 @@ let tweetSchema = new mongoose.Schema({
   },
   hashTags: {
     type: [String]
+  },
+  postedAt: {
+    type: Date,
+    required: true
+  },
+  replies: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "tweet"
+  },
+  likes: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "User"
+  },
+  reposts: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "Users"
   }
 });
 
@@ -45,7 +59,15 @@ const joiTweetSchema = Joi.object({
   user: Joi.objectId()
 });
 
+const joiReplySchema = Joi.object({
+  text: Joi.string().min(1).max(280).required(),
+  mentioned: Joi.array().items(Joi.objectId()),
+  media: Joi.string(),
+  hashTags: Joi.array().items(Joi.string())
+});
+
 module.exports = {
   Tweet: mongoose.model("Tweet", tweetSchema),
-  tweetSchema: joiTweetSchema
+  tweetSchema: joiTweetSchema,
+  replySchema: joiReplySchema
 };

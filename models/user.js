@@ -79,6 +79,10 @@ const joiLoginSchema = Joi.object({
   password: Joi.string().min(8).max(256).required()
 });
 
+const joiUsernameSchema = Joi.object({
+  username: Joi.string().min(3).max(64).requred().trim()
+});
+
 const JoiEditUserSchema = Joi.object({
   name: Joi.string().min(1).max(55).lowercase(),
   email: Joi.string().email(),
@@ -90,5 +94,6 @@ module.exports = {
   userSchema: joiUserSchema,
   User: mongoose.model("User", userSchema),
   loginSchema: joiLoginSchema,
-  editUserSchema: JoiEditUserSchema
+  editUserSchema: JoiEditUserSchema,
+  usernameSchema: joiUsernameSchema
 };

@@ -20,7 +20,7 @@ const corsOptions = {
   exposedHeaders: ["X-Auth-Token"],
   credentials: true,
   methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
-  origin: "*",
+  origin: "https://twitterblockchain.herokuapp.com",
   preflightContinue: false
 };
 

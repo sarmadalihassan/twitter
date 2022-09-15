@@ -13,6 +13,11 @@ exports.postTweet = async (req, res) => {
   let tweet = new Tweet(req.body);
   tweet.user = req.user._id;
   tweet.postedAt = DateTime.now();
+
+  let tags = req.body.text.split(" ").filter((v) => v.startsWith("#"));
+
+  tweet.hashTags = [...tags];
+
   await tweet.save();
 
   return res.status(200).send(tweet);

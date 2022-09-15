@@ -40,24 +40,25 @@ exports.signUp = async (req, res) => {
   return res.status(200).header("x-auth-token", token).send(user);
 };
 
-exports.getUserThroughUsername = async (req, res){
-  try{ 
-    req.body = await usernameSchema.validateAsync(req.body); 
-  }catch(error){
-    return res.status(400).send(error.details); 
+exports.getUserThroughUsername = async (req, res) => {
+  try {
+    req.body = await usernameSchema.validateAsync(req.body);
+  } catch (error) {
+    return res.status(400).send(error.details);
   }
 
-  let user = await User.find({username: req.body.username}).select({
+  let user = await User.find({ username: req.body.username }).select({
     _id: 1,
     name: 1
-  }); 
+  });
 
-  if(!user) 
-    return res.status(400).send(`No user found with username:${req.body.username}`); 
+  if (!user)
+    return res
+      .status(400)
+      .send(`No user found with username:${req.body.username}`);
 
-
-  return res.status(200).send(user); 
-}
+  return res.status(200).send(user);
+};
 
 exports.getUser = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id))
@@ -87,7 +88,7 @@ exports.loginUser = async (req, res) => {
   if (!user) return res.status(400).send("Invalid username or password.");
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) 
+  if (!validPassword)
     return res.status(400).send("Invalid username or password.");
 
   const token = user.generateAuthToken();

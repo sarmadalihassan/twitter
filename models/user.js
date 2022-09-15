@@ -80,7 +80,7 @@ const joiLoginSchema = Joi.object({
 });
 
 const joiUsernameSchema = Joi.object({
-  username: Joi.string().min(3).max(64).requred().trim()
+  username: Joi.string().min(3).max(64).required().trim()
 });
 
 const JoiEditUserSchema = Joi.object({

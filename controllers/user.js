@@ -10,13 +10,11 @@ const { DateTime } = require("luxon");
 const mongoose = require("mongoose");
 
 exports.signUp = async (req, res) => {
-  console.log(req.body);
   try {
     req.body = await userSchema.validateAsync(req.body, { abortEarly: false });
   } catch (error) {
     return res.status(400).send(error.details);
   }
-
   // console.log("hii bros!");
   let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User already registered.");
@@ -63,6 +61,7 @@ exports.loginUser = async (req, res) => {
   }
 
   let user = await User.findOne({ username: req.body.username });
+
   if (!user) return res.status(400).send("Invalid username or password.");
 
   const validPassword = await bcrypt.compare(req.body.password, user.password);
@@ -71,7 +70,9 @@ exports.loginUser = async (req, res) => {
 
   const token = user.generateAuthToken();
 
-  return res.status(200).header("x-auth-token", token).send(user);
+  user.password = null;
+
+  return res.status(200).header("X-Auth-Token", token).send(user);
 };
 
 exports.editUser = async (req, res) => {

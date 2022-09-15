@@ -5,10 +5,15 @@ const { DateTime } = require("luxon");
 
 module.exports = function () {
   mongoose
-    .connect(`mongodb://localhost:27017`, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
+    .connect(
+      `mongodb+srv://sarmad:${config.get(
+        "db.password"
+      )}@cluster0.5cjv4se.mongodb.net/?retryWrites=true&w=majority`,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      }
+    )
     .then(() => {
       console.log(
         DateTime.local().toLocaleString(DateTime.DATETIME_HUGE_WITH_SECONDS)

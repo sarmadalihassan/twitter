@@ -229,3 +229,99 @@
 2022-09-11 15:18:06 [Twitter] error: TypeError: Cannot read properties of null (reading 'following')
     at exports.getHomePage (/home/sarmad/Documents/Twitter/controllers/tweet.js:52:53)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-15 18:48:09 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:70:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-15 18:49:17 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:70:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-15 18:50:27 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:71:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-15 18:51:04 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:70:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-15 18:52:05 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:69:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-15 18:52:30 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:70:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-15 18:53:16 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:70:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-15 18:54:01 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:70:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-15 18:54:22 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:71:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-15 18:54:50 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:72:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-15 18:54:59 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:72:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+2022-09-15 18:55:18 [Twitter] error: Error: data and hash arguments required
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:208:17)
+    at /home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:29:12
+    at new Promise (<anonymous>)
+    at module.exports.promise (/home/sarmad/Documents/Twitter/node_modules/bcrypt/promises.js:20:12)
+    at Object.compare (/home/sarmad/Documents/Twitter/node_modules/bcrypt/bcrypt.js:204:25)
+    at exports.loginUser (/home/sarmad/Documents/Twitter/controllers/user.js:72:38)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

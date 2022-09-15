@@ -7,26 +7,27 @@ const userRoutes = require("../routes/user");
 const tweetRoutes = require("../routes/tweet");
 const morgan = require("morgan");
 
-// const corsOptions = {
-//   allowedHeaders: [
-//     'Origin',
-//     'X-Requested-With',
-//     'Content-Type',
-//     'Accept',
-//     'X-Access-Token',
-//     'Authorization',
-//     'X-Auth-Token'
-//   ],
-//   credentials: true,
-//   methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-//   origin: '*',
-//   preflightContinue: false
-// };
+const corsOptions = {
+  allowedHeaders: [
+    "Origin",
+    "X-Requested-With",
+    "Content-Type",
+    "Accept",
+    "X-Access-Token",
+    "Authorization",
+    "X-Auth-Token"
+  ],
+  exposedHeaders: ["X-Auth-Token"],
+  credentials: true,
+  methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+  origin: "*",
+  preflightContinue: false
+};
 
 module.exports = function (app) {
-  // app.use(cors(corsOptions));
-  // app.options('*', cors());
-  app.use(cors());
+  app.use(cors(corsOptions));
+  // // app.options("*", cors());
+  // app.use(cors());
   app.use(morgan("tiny"));
   // app.use(cookieParser());
   app.use(bodyParser.urlencoded({ extended: false }));

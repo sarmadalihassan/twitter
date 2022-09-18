@@ -54,13 +54,15 @@ exports.getOwnTweets = async (req, res) => {
 exports.getHomePage = async (req, res) => {
   let user = await User.findById(req.user._id);
 
-  let tweets = await Tweet.find({ user: { $in: user.following } }).select({
-    privacy: 0,
-    whoCanReply: 0,
-    __v: 0,
-    mentioned: 0,
-    hashTags: 0
-  });
+  let tweets = await Tweet.find({ user: { $in: user.following } })
+    .populate("User", "username name walletAddress")
+    .select({
+      privacy: 0,
+      whoCanReply: 0,
+      __v: 0,
+      mentioned: 0,
+      hashTags: 0
+    });
 
   if (tweets.length == 0) return res.status(400).send("No Tweets found!");
 

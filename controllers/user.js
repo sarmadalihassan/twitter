@@ -22,7 +22,9 @@ exports.signUp = async (req, res) => {
 
   user = await User.findOne({ username: req.body.username });
   if (user) return res.status(400).send("Username already exists.");
-  user = new User(_.pick(req.body, ["name", "email", "username", "password"]));
+  user = new User(
+    _.pick(req.body, ["name", "email", "username", "password", "walletAddress"])
+  );
 
   const saltRounds = 12;
   const salt = await bcrypt.genSalt(saltRounds);

@@ -47,6 +47,10 @@ const userSchema = new mongoose.Schema({
   },
   profilePicture: {
     type: String
+  },
+  walletAddress: {
+    type: String,
+    minlength: 16
   }
 });
 
@@ -71,7 +75,8 @@ const joiUserSchema = Joi.object({
   tweets: Joi.array().items(Joi.objectId()),
   likes: Joi.array().items(Joi.objectId()),
   password: Joi.string().min(8).max(256).required(),
-  username: Joi.string().min(3).max(64).required()
+  username: Joi.string().min(3).max(64).required(),
+  walletAddress: Joi.string().min(16)
 });
 
 const joiLoginSchema = Joi.object({

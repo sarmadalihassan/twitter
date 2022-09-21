@@ -199,3 +199,18 @@ exports.unfollowUser = async (req, res) => {
 
   return res.status(200).send("You are no longer following this user.");
 };
+
+exports.whoToFollow = async (req, res) => {
+  let users = await User.find();
+
+  return res.status(200).send(users);
+};
+
+exports.deleteUser = async (req, res) => {
+  let User = await User.findById(req.user._id);
+  if (!User) return res.status(400).send("User does not exist.");
+
+  await User.deleteOne();
+
+  return res.status(200).send("User deleted successfully.");
+};

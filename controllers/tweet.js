@@ -55,7 +55,7 @@ exports.getHomePage = async (req, res) => {
   let user = await User.findById(req.user._id);
 
   let tweets = await Tweet.find({ user: { $in: user.following } })
-    .populate("User", "username name walletAddress")
+    .populate("user", "username name walletAddress")
     .select({
       privacy: 0,
       whoCanReply: 0,
@@ -123,4 +123,19 @@ exports.repostTweet = async (req, res) => {
   return res.status(200).send(tweet);
 };
 
-exports.getExplorePage = async (req, res) => {};
+exports.getTrends = async (req, res) => {
+  return res.status(200).send([
+    {
+      tag: "#salab",
+      tweets: 20
+    },
+    {
+      tag: "#weather",
+      tweets: 50
+    },
+    {
+      tag: "#cricket",
+      tweets: 50
+    }
+  ]);
+};

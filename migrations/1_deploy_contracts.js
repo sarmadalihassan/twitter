@@ -1,5 +1,5 @@
-let Greeting = artifacts.require("Greeting");
+let Twitter = artifacts.require("Twitter");
 
 module.exports = function (deployer) {
-  deployer.deploy(Greeting, "Hello");
+  deployer.deploy(Twitter);
 };

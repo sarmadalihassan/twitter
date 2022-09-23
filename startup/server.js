@@ -21,6 +21,7 @@ let server = null;
 //   });
 // } else {
 const logger = require("./logging");
+// eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 8080;
 server = app.listen(PORT, () => {
   logger.info(`Listening at http://localhost:${PORT}`);

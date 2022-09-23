@@ -201,9 +201,27 @@ exports.unfollowUser = async (req, res) => {
 };
 
 exports.whoToFollow = async (req, res) => {
-  let users = await User.find();
+  // who should be suggested to follow?
 
-  return res.status(200).send(users);
+  /*
+   * 1. people followed by people you follow
+   * 2. people who follow you
+   * 3. people who make tweets with similar hashtags
+   */
+
+  // 1. people followed by people you follow
+
+  const currentUser = await User.findById(req.user._id);
+
+  const peopleFollowedByPeopleYouFollow = await User.find({
+    followers: { $in: currentUser.following }
+  }).select({ _id: 1, name: 1, username: 1, profilePicture: 1 });
+
+  // 2. people who follow you
+  const peopleWhoFollowCurrentUser = await User.find({
+    following: req.user._id,
+    followers: { $ne: currentUser._id }
+  });
 };
 
 exports.deleteUser = async (req, res) => {

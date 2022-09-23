@@ -8,9 +8,8 @@ contract Twitter {
       _owner = msg.sender;
     }
 
-    mapping(string => bytes32) public addressOfTag; 
-    mapping(bytes32 => uint) private balanceOfTags; 
-
+    mapping(string => address) private addressOfTag; 
+    mapping(address => uint) private balanceOfTags; 
 
     function owner() public view returns(address) {
         return _owner;
@@ -25,21 +24,22 @@ contract Twitter {
         _;
     }
 
-    function donateToHashTag(string calldata tag, uint amount) external payable {
-       require(msg.value== amount * (10 ** 18)); 
-       bytes32 _address = keccak256(abi.encodePacked(tag));
+    function contributeToHashTag(string calldata tag) external payable {
+       require(msg.value > 100 wei, "Minimun donation is 100 wei.");
+       address _address = address(uint160(uint256(keccak256(abi.encodePacked(tag)))));
        addressOfTag[tag] = _address; 
-       balanceOfTags[_address] += amount * (10 ** 18); 
+       balanceOfTags[_address] += msg.value; 
     }
 
-    function getDonatedAmountToHashTag(string calldata tag) external view returns(uint){
+    function getHashTagBalance(string calldata tag) external view returns(uint){
         return balanceOfTags[addressOfTag[tag]]; 
     }
 
     function transferFromHashTag(string memory tag, uint amount, address payable to) public onlyOwner{
-        require(address(this).balance >= amount* (10 * 18)); 
-        balanceOfTags[addressOfTag[tag]] -= amount * (10 ** 18); 
-        to.transfer((amount * (10 ** 18))); 
+        require(address(this).balance >= amount); 
+        require(balanceOfTags[addressOfTag[tag]] >= (amount));
+        balanceOfTags[addressOfTag[tag]] -= amount; 
+        to.transfer((amount)); 
         if(balanceOfTags[addressOfTag[tag]] == 0){
             delete balanceOfTags[addressOfTag[tag]];
             delete addressOfTag[tag]; 

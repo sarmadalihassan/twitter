@@ -83,8 +83,7 @@ module.exports = {
         );
       },
       network_id: 4,
-      networkCheckOutTime: 15000,
-      timeoutBlocks: 1000
+      networkCheckOutTime: 18000
     }
     // networks: {
     //   // Useful for testing. The `development` name is special - truffle uses it by default

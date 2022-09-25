@@ -27,6 +27,7 @@
     "luxon": "^3.0.3",
     "mongoose": "^6.5.4",
     "morgan": "^1.10.0",
+    "node-cron": "^3.0.2",
     "prettier": "^2.7.1",
     "request-ip": "^3.3.0",
     "truffle": "^5.5.30",

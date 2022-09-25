@@ -14,9 +14,13 @@ exports.postTweet = async (req, res) => {
   tweet.user = req.user._id;
   tweet.postedAt = DateTime.now();
 
-  let tags = req.body.text.split(" ").filter((v) => v.startsWith("#"));
+  let tags = req.body.text.split(" ").filter(v => v.startsWith("#"));
 
   tweet.hashTags = [...tags];
+
+  let mentioned = req.body.text.split(" ").filter(v => v.startsWith("@"));
+
+  tweet.mentioned = [...mentioned];
 
   await tweet.save();
 
@@ -124,18 +128,14 @@ exports.repostTweet = async (req, res) => {
 };
 
 exports.getTrends = async (req, res) => {
-  return res.status(200).send([
-    {
-      tag: "#salab",
-      tweets: 20
-    },
-    {
-      tag: "#weather",
-      tweets: 50
-    },
-    {
-      tag: "#cricket",
-      tweets: 50
-    }
+  let trending = await Tweet.aggregate([{$sort: {"_id": -1}},
+  {$limit:10000}, 
+  {$match: {"hashTags.0": {"$exists": true}}},
+  {$unwind: "$hashTags"},
+  {$project: {"hashTags": 1, "_id": 0}},
+  {$group: {"_id": {$toLower: "$hashTags"}, count: {$sum: 1}}},
+  {$sort:{"count":1}}, {$limit:5}
   ]);
+
+  return res.status(200).send(trending); 
 };

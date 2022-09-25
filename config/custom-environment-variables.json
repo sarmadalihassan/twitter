@@ -2,6 +2,13 @@
     "db": {
       "password": "app_db_password"
     },
-    "jwtPrivateKey": "app_jwt_private_key"
+    "jwtPrivateKey": "app_jwt_private_key",
+    "contract": {
+      "twitter" : {
+        "address": "app_twitter_contract_address"
+      },
+      "deployerKey": "app_contract_deployer_key",
+      "infuraAPIKey": "app_infura_api_key"
+    }
   }
   

@@ -36,8 +36,8 @@ contract Twitter {
     }
 
     function transferFromHashTag(string memory tag, uint amount, address payable to) public onlyOwner{
-        require(address(this).balance >= amount); 
-        require(balanceOfTags[addressOfTag[tag]] >= (amount));
+        require(address(this).balance >= amount, "Amount exceeds contract balance"); 
+        require(balanceOfTags[addressOfTag[tag]] >= (amount), "Amount exceeds tag balance.");
         balanceOfTags[addressOfTag[tag]] -= amount; 
         to.transfer((amount)); 
         if(balanceOfTags[addressOfTag[tag]] == 0){

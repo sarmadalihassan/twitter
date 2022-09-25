@@ -20,7 +20,7 @@ module.exports = function () {
       );
       logger.info("Connected to MongoDB...");
     })
-    .catch((err) => {
+    .catch(err => {
       console.log("Error Connecting to Mongo", err);
     });
 };

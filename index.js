@@ -1,8 +1,9 @@
-// const { app } = require("./startup/server");
-// require("./startup/prod")(app);
-// require("./startup/config")();
-// require("./startup/db")();
-// require("./startup/routes")(app);
+const { app } = require("./startup/server");
+require("./startup/prod")(app);
+require("./startup/config")();
+require("./startup/db")();
+require("./startup/routes")(app);
 // require('./util/cache');
 
-require("./util/web3transfer")();
+// require("./util/web3transfer")();
+require("./test.js")();

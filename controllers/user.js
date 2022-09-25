@@ -9,6 +9,7 @@ const bcrypt = require("bcrypt");
 const _ = require("lodash");
 const { DateTime } = require("luxon");
 const mongoose = require("mongoose");
+const { Tweet } = require("../models/tweet");
 
 exports.signUp = async (req, res) => {
   try {
@@ -190,9 +191,9 @@ exports.unfollowUser = async (req, res) => {
     return res.status(400).send("You are not following this user.");
 
   currentUser.following = currentUser.following.filter(
-    (id) => id !== req.params.id
+    id => id !== req.params.id
   );
-  user.followers = user.followers.filter((id) => id !== req.user._id);
+  user.followers = user.followers.filter(id => id !== req.user._id);
 
   await currentUser.save();
   await user.save();
@@ -207,6 +208,7 @@ exports.whoToFollow = async (req, res) => {
    * 1. people followed by people you follow
    * 2. people who follow you
    * 3. people who make tweets with similar hashtags
+   * 4. people who mentioned you in their tweets
    */
 
   // 1. people followed by people you follow
@@ -215,13 +217,60 @@ exports.whoToFollow = async (req, res) => {
 
   const peopleFollowedByPeopleYouFollow = await User.find({
     followers: { $in: currentUser.following }
-  }).select({ _id: 1, name: 1, username: 1, profilePicture: 1 });
+  }).select({ _id: 1, followers: 1 });
 
   // 2. people who follow you
   const peopleWhoFollowCurrentUser = await User.find({
     following: req.user._id,
     followers: { $ne: currentUser._id }
+  }).select({
+    _id: 1,
+    followers: 1
   });
+
+  // 3. people who make tweets with similar hashtags
+  const tweetsByCurrentUser = await Tweet.find({
+    user: req.user._id
+  })
+    .select({ hashTags: 1 })
+    .limit(10)
+    .sort({ postedAt: 1 });
+
+  const hashTags = tweetsByCurrentUser.map(tweet => tweet.hashTags);
+
+  const peopleWhoUsedSimilarTags = await Tweet.find({
+    hashTags: { $in: hashTags },
+    user: { $ne: req.user._id }
+  })
+    .select({ user: 1 })
+    .limit(10);
+
+  //getting the users now
+  let usersCount = await User.find({
+    _id: {
+      $in: [
+        ...peopleFollowedByPeopleYouFollow,
+        ...peopleWhoFollowCurrentUser,
+        ...peopleWhoUsedSimilarTags
+      ]
+    }
+  }).count();
+
+  //picking at random 5 users
+  let users = await User.find({
+    _id: {
+      $in: [
+        ...peopleFollowedByPeopleYouFollow,
+        ...peopleWhoFollowCurrentUser,
+        ...peopleWhoUsedSimilarTags
+      ]
+    }
+  })
+    .select({ _id: 1, name: 1, username: 1, profilePicture: 1 })
+    .skip(Math.random * (usersCount - 5))
+    .limit(5);
+
+  return res.status(200).send(users);
 };
 
 exports.deleteUser = async (req, res) => {

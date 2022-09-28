@@ -1,5 +1,4 @@
 const Web3 = require("web3");
-const abi = require("../build/contracts/Twitter.json");
 const Provider = require("@truffle/hdwallet-provider");
 const config = require("config");
 const web3 = new Web3(

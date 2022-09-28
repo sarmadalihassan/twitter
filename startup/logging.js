@@ -30,12 +30,15 @@ logger = createLogger({
   }
 });
 
-process.on("unhandledRejection", (ex) => {
+// eslint-disable-next-line no-undef
+process.on("unhandledRejection", ex => {
   throw ex;
 });
 
-process.on("uncaughtException", (ex) => {
+// eslint-disable-next-line no-undef
+process.on("uncaughtException", ex => {
   logger.error(`${ex.stack}`);
+  // eslint-disable-next-line no-undef
   process.exit();
 });
 

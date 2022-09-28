@@ -150,125 +150,127 @@ exports.editUser = async (req, res) => {
 };
 
 exports.followUser = async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id))
-    return res.status(400).send(`Invalid objectid: ${req.params.id} of user.`);
+  //   if (!mongoose.Types.ObjectId.isValid(req.params.id))
+  //     return res.status(400).send(`Invalid objectid: ${req.params.id} of user.`);
 
-  if (req.user._id === req.params.id)
-    return res.status(400).send("You cannot follow yourself.");
+  //   if (req.user._id === req.params.id)
+  //     return res.status(400).send("You cannot follow yourself.");
 
-  const user = await User.findById(req.params.id);
-  if (!user) return res.status(400).send("User does not exist.");
+  //   const user = await User.findById(req.params.id);
+  //   if (!user) return res.status(400).send("User does not exist.");
 
-  const currentUser = await User.findById(req.user._id);
-  if (!currentUser) return res.status(400).send("User does not exist.");
+  //   const currentUser = await User.findById(req.user._id);
+  //   if (!currentUser) return res.status(400).send("User does not exist.");
 
-  if (currentUser.following.includes(req.params.id))
-    return res.status(400).send("You are already following this user.");
+  //   if (currentUser.following.includes(req.params.id))
+  //     return res.status(400).send("You are already following this user.");
 
-  currentUser.following.push(req.params.id);
-  user.followers.push(req.user._id);
+  //   currentUser.following.push(req.params.id);
+  //   user.followers.push(req.user._id);
 
-  await currentUser.save();
-  await user.save();
+  //   await currentUser.save();
+  //   await user.save();
 
-  return res.status(200).send("You are now following this user.");
-};
+  //   return res.status(200).send("You are now following this user.");
+  // };
 
-exports.unfollowUser = async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id))
-    return res.status(400).send(`Invalid objectid: ${req.params.id} of user.`);
+  // exports.unfollowUser = async (req, res) => {
+  //   if (!mongoose.Types.ObjectId.isValid(req.params.id))
+  //     return res.status(400).send(`Invalid objectid: ${req.params.id} of user.`);
 
-  if (req.user._id === req.params.id)
-    return res.status(400).send("You cannot unfollow yourself.");
+  //   if (req.user._id === req.params.id)
+  //     return res.status(400).send("You cannot unfollow yourself.");
 
-  const user = await User.findById(req.params.id);
-  if (!user) return res.status(400).send("User does not exist.");
+  //   const user = await User.findById(req.params.id);
+  //   if (!user) return res.status(400).send("User does not exist.");
 
-  const currentUser = await User.findById(req.user._id);
-  if (!currentUser) return res.status(400).send("User does not exist.");
+  //   const currentUser = await User.findById(req.user._id);
+  //   if (!currentUser) return res.status(400).send("User does not exist.");
 
-  if (!currentUser.following.includes(req.params.id))
-    return res.status(400).send("You are not following this user.");
+  //   if (!currentUser.following.includes(req.params.id))
+  //     return res.status(400).send("You are not following this user.");
 
-  currentUser.following = currentUser.following.filter(
-    id => id !== req.params.id
-  );
-  user.followers = user.followers.filter(id => id !== req.user._id);
+  //   currentUser.following = currentUser.following.filter(
+  //     id => id !== req.params.id
+  //   );
+  //   user.followers = user.followers.filter(id => id !== req.user._id);
 
-  await currentUser.save();
-  await user.save();
+  //   await currentUser.save();
+  //   await user.save();
 
-  return res.status(200).send("You are no longer following this user.");
-};
+  //   return res.status(200).send("You are no longer following this user.");
+  // };
 
-exports.whoToFollow = async (req, res) => {
-  // who should be suggested to follow?
+  // exports.whoToFollow = async (req, res) => {
+  //   // who should be suggested to follow?
 
-  /*
-   * 1. people followed by people you follow
-   * 2. people who follow you
-   * 3. people who make tweets with similar hashtags
-   * 4. people who mentioned you in their tweets
-   */
+  //   /*
+  //    * 1. people followed by people you follow
+  //    * 2. people who follow you
+  //    * 3. people who make tweets with similar hashtags
+  //    * 4. people who mentioned you in their tweets
+  //    */
 
-  // 1. people followed by people you follow
+  //   // 1. people followed by people you follow
 
-  const currentUser = await User.findById(req.user._id);
+  //   const currentUser = await User.findById(req.user._id);
 
-  const peopleFollowedByPeopleYouFollow = await User.find({
-    followers: { $in: currentUser.following }
-  }).select({ _id: 1, followers: 1 });
+  //   const peopleFollowedByPeopleYouFollow = await User.find({
+  //     followers: { $in: currentUser.following }
+  //   }).select({ _id: 1, followers: 1 });
 
-  // 2. people who follow you
-  const peopleWhoFollowCurrentUser = await User.find({
-    following: req.user._id,
-    followers: { $ne: currentUser._id }
-  }).select({
-    _id: 1,
-    followers: 1
-  });
+  //   // 2. people who follow you
+  //   const peopleWhoFollowCurrentUser = await User.find({
+  //     following: req.user._id,
+  //     followers: { $ne: currentUser._id }
+  //   }).select({
+  //     _id: 1,
+  //     followers: 1
+  //   });
 
-  // 3. people who make tweets with similar hashtags
-  const tweetsByCurrentUser = await Tweet.find({
-    user: req.user._id
-  })
-    .select({ hashTags: 1 })
-    .limit(10)
-    .sort({ postedAt: 1 });
+  //   // 3. people who make tweets with similar hashtags
+  //   const tweetsByCurrentUser = await Tweet.find({
+  //     user: req.user._id
+  //   })
+  //     .select({ hashTags: 1 })
+  //     .limit(10)
+  //     .sort({ postedAt: 1 });
 
-  const hashTags = tweetsByCurrentUser.map(tweet => tweet.hashTags);
+  //   const hashTags = tweetsByCurrentUser.map(tweet => tweet.hashTags);
 
-  const peopleWhoUsedSimilarTags = await Tweet.find({
-    hashTags: { $in: hashTags },
-    user: { $ne: req.user._id }
-  })
-    .select({ user: 1 })
-    .limit(10);
+  //   const peopleWhoUsedSimilarTags = await Tweet.find({
+  //     hashTags: { $in: hashTags },
+  //     user: { $ne: req.user._id }
+  //   })
+  //     .select({ user: 1 })
+  //     .limit(10);
 
-  //getting the users now
-  let usersCount = await User.find({
-    _id: {
-      $in: [
-        ...peopleFollowedByPeopleYouFollow,
-        ...peopleWhoFollowCurrentUser,
-        ...peopleWhoUsedSimilarTags
-      ]
-    }
-  }).count();
+  //   //getting the users now
+  //   let usersCount = await User.find({
+  //     _id: {
+  //       $in: [
+  //         ...peopleFollowedByPeopleYouFollow,
+  //         ...peopleWhoFollowCurrentUser,
+  //         ...peopleWhoUsedSimilarTags
+  //       ]
+  //     }
+  //   }).count();
 
-  //picking at random 5 users
-  let users = await User.find({
-    _id: {
-      $in: [
-        ...peopleFollowedByPeopleYouFollow,
-        ...peopleWhoFollowCurrentUser,
-        ...peopleWhoUsedSimilarTags
-      ]
-    }
-  })
-    .select({ _id: 1, name: 1, username: 1, profilePicture: 1 })
-    .skip(Math.random * (usersCount - 5))
-    .limit(5);
+  //   //picking at random 5 users
+  //   let users = await User.find({
+  //     _id: {
+  //       $in: [
+  //         ...peopleFollowedByPeopleYouFollow,
+  //         ...peopleWhoFollowCurrentUser,
+  //         ...peopleWhoUsedSimilarTags
+  //       ]
+  //     }
+  //   })
+  //     .select({ _id: 1, name: 1, username: 1, profilePicture: 1 })
+  //     .skip(Math.random * (usersCount - 5))
+  //     .limit(5);
+
+  let users = await User.find({ _id: { $ne: req.user._id } });
 
   return res.status(200).send(users);
 };

@@ -5,6 +5,8 @@ const requestIp = require("request-ip");
 const cors = require("cors");
 const userRoutes = require("../routes/user");
 const tweetRoutes = require("../routes/tweet");
+const hashTagPlusRouters = require('../routes/hashTagPlus'); 
+
 const morgan = require("morgan");
 
 // const corsOptions = {
@@ -36,5 +38,6 @@ module.exports = function (app) {
   // app.use(ipConfig);
   app.use("/api/user", userRoutes);
   app.use("/api/tweet", tweetRoutes);
+  app.use('/api/hashtagplus', hashTagPlusRouters);
   app.use(error);
 };

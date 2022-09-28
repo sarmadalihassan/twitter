@@ -5,6 +5,7 @@
     "jwtPrivateKey": "app_jwt_private_key",
     "contract": {
       "twitter" : {
+        "owner" : "app_twitter_contract_owner",
         "address": "app_twitter_contract_address"
       },
       "deployerKey": "app_contract_deployer_key",

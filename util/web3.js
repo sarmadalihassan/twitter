@@ -5,7 +5,7 @@ const config = require("config");
 const web3 = new Web3(
   new Provider(
     `${config.get("contract.deployerKey")}`,
-    `https://rinkeby.infura.io/v3/${config.get("contract.infuraKey")}`
+    `https://rinkeby.infura.io/v3/${config.get("contract.infuraAPIKey")}`
   )
 );
 

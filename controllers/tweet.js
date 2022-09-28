@@ -128,13 +128,13 @@ exports.repostTweet = async (req, res) => {
 };
 
 exports.getTrends = async (req, res) => {
-  let trending = await Tweet.aggregate([{$sort: {"_id": -1}},
-  {$limit:10000}, 
+  let trending = await Tweet.aggregate([
+  {$limit:10000},
   {$match: {"hashTags.0": {"$exists": true}}},
   {$unwind: "$hashTags"},
   {$project: {"hashTags": 1, "_id": 0}},
   {$group: {"_id": {$toLower: "$hashTags"}, count: {$sum: 1}}},
-  {$sort:{"count":1}}, {$limit:5}
+  {$sort:{"count": -1}}, {$limit:10}
   ]);
 
   return res.status(200).send(trending); 

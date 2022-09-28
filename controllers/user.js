@@ -150,58 +150,58 @@ exports.editUser = async (req, res) => {
 };
 
 exports.followUser = async (req, res) => {
-  //   if (!mongoose.Types.ObjectId.isValid(req.params.id))
-  //     return res.status(400).send(`Invalid objectid: ${req.params.id} of user.`);
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(400).send(`Invalid objectid: ${req.params.id} of user.`);
 
-  //   if (req.user._id === req.params.id)
-  //     return res.status(400).send("You cannot follow yourself.");
+  if (req.user._id === req.params.id)
+    return res.status(400).send("You cannot follow yourself.");
 
-  //   const user = await User.findById(req.params.id);
-  //   if (!user) return res.status(400).send("User does not exist.");
+  const user = await User.findById(req.params.id);
+  if (!user) return res.status(400).send("User does not exist.");
 
-  //   const currentUser = await User.findById(req.user._id);
-  //   if (!currentUser) return res.status(400).send("User does not exist.");
+  const currentUser = await User.findById(req.user._id);
+  if (!currentUser) return res.status(400).send("User does not exist.");
 
-  //   if (currentUser.following.includes(req.params.id))
-  //     return res.status(400).send("You are already following this user.");
+  if (currentUser.following.includes(req.params.id))
+    return res.status(400).send("You are already following this user.");
 
-  //   currentUser.following.push(req.params.id);
-  //   user.followers.push(req.user._id);
+  currentUser.following.push(req.params.id);
+  user.followers.push(req.user._id);
 
-  //   await currentUser.save();
-  //   await user.save();
+  await currentUser.save();
+  await user.save();
 
-  //   return res.status(200).send("You are now following this user.");
-  // };
+  return res.status(200).send("You are now following this user.");
+};
 
-  // exports.unfollowUser = async (req, res) => {
-  //   if (!mongoose.Types.ObjectId.isValid(req.params.id))
-  //     return res.status(400).send(`Invalid objectid: ${req.params.id} of user.`);
+exports.unfollowUser = async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(400).send(`Invalid objectid: ${req.params.id} of user.`);
 
-  //   if (req.user._id === req.params.id)
-  //     return res.status(400).send("You cannot unfollow yourself.");
+  if (req.user._id === req.params.id)
+    return res.status(400).send("You cannot unfollow yourself.");
 
-  //   const user = await User.findById(req.params.id);
-  //   if (!user) return res.status(400).send("User does not exist.");
+  const user = await User.findById(req.params.id);
+  if (!user) return res.status(400).send("User does not exist.");
 
-  //   const currentUser = await User.findById(req.user._id);
-  //   if (!currentUser) return res.status(400).send("User does not exist.");
+  const currentUser = await User.findById(req.user._id);
+  if (!currentUser) return res.status(400).send("User does not exist.");
 
-  //   if (!currentUser.following.includes(req.params.id))
-  //     return res.status(400).send("You are not following this user.");
+  if (!currentUser.following.includes(req.params.id))
+    return res.status(400).send("You are not following this user.");
 
-  //   currentUser.following = currentUser.following.filter(
-  //     id => id !== req.params.id
-  //   );
-  //   user.followers = user.followers.filter(id => id !== req.user._id);
+  currentUser.following = currentUser.following.filter(
+    id => id !== req.params.id
+  );
+  user.followers = user.followers.filter(id => id !== req.user._id);
 
-  //   await currentUser.save();
-  //   await user.save();
+  await currentUser.save();
+  await user.save();
 
-  //   return res.status(200).send("You are no longer following this user.");
-  // };
+  return res.status(200).send("You are no longer following this user.");
+};
 
-  // exports.whoToFollow = async (req, res) => {
+exports.whoToFollow = async (req, res) => {
   //   // who should be suggested to follow?
 
   //   /*

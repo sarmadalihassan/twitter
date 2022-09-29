@@ -43,7 +43,8 @@ exports.startHashTagPlus = async (req, res) => {
 
   let hashTagPlus = await HashTagPlus.find({ text: req.body.text });
 
-  if (hashTagPlus.legnth > 0)
+  
+  if (hashTagPlus.length > 0)
     return res.status(400).send("Hashtag+ already exists");
 
   hashTagPlus = new HashTagPlus({
@@ -51,7 +52,8 @@ exports.startHashTagPlus = async (req, res) => {
     startedBy: req.user._id,
     donateTo: req.body.donateTo,
     expiry: req.body.expiry, // js iso string with TZ info...
-    timezone: req.body.timezone
+    timezone: req.body.timezone,
+    description: req.body.description
   });
 
   let dateTime = DateTime.now().setZone(req.body.timezone);

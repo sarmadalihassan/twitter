@@ -66,17 +66,17 @@ exports.getUserThroughUsername = async (req, res) => {
 exports.getUser = async (req, res) => {
   // a user should be able to look up any other user
   // return the whole profile if the user is looking up himself
+  let user = null;
+  if (req.params.id == 'self') {
+    user = await User.findById(req.user._id).select({password: 0});
+    return res.status(200).send(user);
+  } 
   if (!mongoose.Types.ObjectId.isValid(req.params.id))
     return res.status(400).send(`Invalid objectId:${req.params.id}`);
 
-  let user = null;
-  if (req.params.id == req.user._id) {
-    user = await User.findById(req.user._id).select({ password: -1 });
-    return res.status(200).send(user);
-  }
   //if a profile is private and you follow or if it is public then  return everything
   //if a profile is private then return only the name and username and picture, number of followers and following
-  user = await User.findById(req.params.id); 
+  user = await User.findById(req.params.id).select({password: 0}); 
   user.password = null; 
 
   if(user.profileType == 'private'){

@@ -22,6 +22,14 @@ const hashTagPlusSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     required: true
+  },
+  timezone: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
   }
 });
 

@@ -64,18 +64,34 @@ exports.getUserThroughUsername = async (req, res) => {
 };
 
 exports.getUser = async (req, res) => {
+  // a user should be able to look up any other user
+  // return the whole profile if the user is looking up himself
   if (!mongoose.Types.ObjectId.isValid(req.params.id))
-    return res.status(400).send(`Invalid objectid: ${req.params.id} of user.`);
+    return res.status(400).send(`Invalid objectId:${req.params.id}`);
 
-  if (req.user._id !== req.params.id)
-    return res
-      .status(400)
-      .send("You are not authorized to view this user's profile.");
+  let user = null;
+  if (req.params.id == req.user._id) {
+    user = await User.findById(req.user._id).select({ password: -1 });
+    return res.status(200).send(user);
+  }
+  //if a profile is private and you follow or if it is public then  return everything
+  //if a profile is private then return only the name and username and picture, number of followers and following
+  user = await User.findById(req.params.id); 
+  user.password = null; 
 
-  const user = await User.findById(req.params.id).select("-password");
+  if(user.profileType == 'private'){
+    let newUser = {
+     ...User
+    }
 
-  if (!user) return res.status(400).send("User does not exist.");
+    newUser.followers = newUser.followers.length; 
+    newUser.following = newUser.following.length; 
+    newUser.tweets = null; 
+    newUser.walletAddress = null; 
+    newUser.email = null; 
 
+  }
+  //public profile case and following this user by currentuser case
   return res.status(200).send(user);
 };
 
@@ -202,80 +218,112 @@ exports.unfollowUser = async (req, res) => {
 };
 
 exports.whoToFollow = async (req, res) => {
-  //   // who should be suggested to follow?
+  // who should be suggested to follow?
 
-  //   /*
-  //    * 1. people followed by people you follow
-  //    * 2. people who follow you
-  //    * 3. people who make tweets with similar hashtags
-  //    * 4. people who mentioned you in their tweets
-  //    */
+  /*
+   * 1. people followed by people you follow
+   * 2. people who follow you
+   * 3. people who make tweets with similar hashtags
+   * 4. people who mentioned you in their tweets
+   */
 
-  //   // 1. people followed by people you follow
+  // 1. people followed by people you follow
 
-  //   const currentUser = await User.findById(req.user._id);
+  //test to see what happens when very few users exist in the database...
 
-  //   const peopleFollowedByPeopleYouFollow = await User.find({
-  //     followers: { $in: currentUser.following }
-  //   }).select({ _id: 1, followers: 1 });
+  const currentUser = await User.findById(req.user._id);
 
-  //   // 2. people who follow you
-  //   const peopleWhoFollowCurrentUser = await User.find({
-  //     following: req.user._id,
-  //     followers: { $ne: currentUser._id }
-  //   }).select({
-  //     _id: 1,
-  //     followers: 1
-  //   });
+  const peopleFollowedByPeopleYouFollow = await User.find({
+    followers: { $in: currentUser.following }
+  }).select({ _id: 1, followers: 1 });
 
-  //   // 3. people who make tweets with similar hashtags
-  //   const tweetsByCurrentUser = await Tweet.find({
-  //     user: req.user._id
-  //   })
-  //     .select({ hashTags: 1 })
-  //     .limit(10)
-  //     .sort({ postedAt: 1 });
+  console.log(
+    "peopleFollowedByPeopleYouFollow",
+    peopleFollowedByPeopleYouFollow
+  );
 
-  //   const hashTags = tweetsByCurrentUser.map(tweet => tweet.hashTags);
+  // 2. people who follow you but you don't follow back
+  const peopleWhoFollowCurrentUser = await User.find({
+    following: { $in: [currentUser._id] },
+    followers: { $ne: [currentUser._id] }
+  }).select({
+    _id: 1,
+    followers: 1
+  });
+  console.log("People who follow current user: ", peopleWhoFollowCurrentUser);
 
-  //   const peopleWhoUsedSimilarTags = await Tweet.find({
-  //     hashTags: { $in: hashTags },
-  //     user: { $ne: req.user._id }
-  //   })
-  //     .select({ user: 1 })
-  //     .limit(10);
+  // 3. people who make tweets with similar hashtags
+  const tweetsByCurrentUser = await Tweet.find({
+    user: req.user._id
+  })
+    .select({ hashTags: 1 })
+    .limit(10)
+    .sort({ postedAt: 1 });
 
-  //   //getting the users now
-  //   let usersCount = await User.find({
-  //     _id: {
-  //       $in: [
-  //         ...peopleFollowedByPeopleYouFollow,
-  //         ...peopleWhoFollowCurrentUser,
-  //         ...peopleWhoUsedSimilarTags
-  //       ]
-  //     }
-  //   }).count();
+  const hashTags = tweetsByCurrentUser.map(tweet => tweet.hashTags);
 
-  //   //picking at random 5 users
-  //   let users = await User.find({
-  //     _id: {
-  //       $in: [
-  //         ...peopleFollowedByPeopleYouFollow,
-  //         ...peopleWhoFollowCurrentUser,
-  //         ...peopleWhoUsedSimilarTags
-  //       ]
-  //     }
-  //   })
-  //     .select({ _id: 1, name: 1, username: 1, profilePicture: 1 })
-  //     .skip(Math.random * (usersCount - 5))
-  //     .limit(5);
+  const peopleWhoUsedSimilarTags = await Tweet.find({
+    hashTags: { $in: hashTags },
+    user: { $ne: req.user._id }
+  })
+    .sort({ _id: -1 })
+    .select({ user: 1 })
+    .limit(10);
 
-  let users = await User.find({ _id: { $ne: req.user._id } });
+  console.log("peopleWhoUsedSimilarTags", peopleWhoUsedSimilarTags);
+
+  //4. people who mentioned you,
+
+  const peopleWhoMentionedYou = await Tweet.find({
+    mentioned: { $in: [req.user._id] }
+  })
+    .sort({ _id: 0, __v: 0, mentioned: 1 })
+    .select({ user: 1 })
+    .limit(10);
+
+  console.log("peopleWhoMentionedYou", peopleWhoMentionedYou);
+  //getting the users now
+  let usersCount = await User.find({
+    _id: {
+      $in: [
+        ...peopleFollowedByPeopleYouFollow,
+        ...peopleWhoFollowCurrentUser,
+        ...peopleWhoUsedSimilarTags,
+        ...peopleWhoMentionedYou
+      ]
+    }
+  }).count();
+
+  let users = null;
+  console.log(usersCount);
+  if (usersCount > 0) {
+    //picking at random 5 users
+    users = await User.find({
+      _id: {
+        $in: [
+          ...peopleFollowedByPeopleYouFollow,
+          ...peopleWhoFollowCurrentUser,
+          ...peopleWhoUsedSimilarTags
+        ]
+      }
+    })
+      .select({ _id: 1, name: 1, username: 1, profilePicture: 1 })
+      .skip(Math.random * (usersCount - 5))
+      .limit(5);
+  } else {
+    users = await User.find({
+      _id: { $ne: req.user._id }
+    })
+      .select({ _id: 1, name: 1, userName: 1, profilePicture: 1 })
+      .sort({ _id: -1 })
+      .limit(5);
+  }
 
   return res.status(200).send(users);
 };
 
 exports.deleteUser = async (req, res) => {
+  //user can only delete itself.
   let User = await User.findById(req.user._id);
   if (!User) return res.status(400).send("User does not exist.");
 

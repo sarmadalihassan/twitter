@@ -1,6 +1,32 @@
 const { HashTagPlus, hashTagPlusSchema } = require("../models/hashTagPlus");
 const { User } = require("../models/user");
 const { DateTime } = require("luxon");
+const Joi = require("joi");
+
+//Get all hashtags+, with pagination..
+const paginationSchema = Joi.object({
+  itemsPerPage: Joi.number().required(),
+  page: Joi.number().default(0)
+});
+
+exports.getTags = async (req, res) => {
+  try {
+    req.query = await paginationSchema.validateAsync(req.query, {
+      abortEarly: false
+    });
+  } catch (error) {
+    return res.status(400).send(error.details);
+  }
+
+  const hashTags = await HashTagPlus.find({})
+    .skip((req.query.page - 1) * req.query.itemsPerPage)
+    .limit(req.query.itemsPerPage);
+
+  if (hashTags.length == 0)
+    return res.status(400).send("No active hastags+ found.");
+
+  return res.status(200).send(hashTags);
+};
 
 //post new hashtagplus
 exports.startHashTagPlus = async (req, res) => {
@@ -17,7 +43,7 @@ exports.startHashTagPlus = async (req, res) => {
 
   let hashTagPlus = await HashTagPlus.find({ text: req.body.text });
 
-  if (hashTagPlus.legnth != 0)
+  if (hashTagPlus.legnth > 0)
     return res.status(400).send("Hashtag+ already exists");
 
   hashTagPlus = new HashTagPlus({

@@ -51,6 +51,11 @@ const userSchema = new mongoose.Schema({
   walletAddress: {
     type: String,
     minlength: 16
+  },
+  profileType: {
+    type: String,
+    default: "public",
+    required: true
   }
 });
 

@@ -37,7 +37,8 @@ const joiHashTagPlusSchema = Joi.object({
   text: Joi.string().required(),
   expiry: Joi.date().iso(),
   donateTo: Joi.string().required(),
-  timezone: Joi.string().required()
+  timezone: Joi.string().required(),
+  description: Joi.string().required()
 });
 
 module.exports = {

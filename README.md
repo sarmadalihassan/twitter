@@ -15,3 +15,9 @@ This is a NodeJS backend server for the twitter blockchain app.
  7. Node-Cron to expire funds donated to a hashtag+ 
  8. Works internationally, handles every timezone. So an expiry date set by a person in EST takes effect 
     in EST time.
+
+#Deployed At heroku  
+- https://twitterblockchain.herokuapp.com
+
+#API Documentation 
+[Postman API documentation](https://documenter.getpostman.com/view/23158890/2s7YSMZtVL)

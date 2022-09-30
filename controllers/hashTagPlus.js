@@ -1,4 +1,4 @@
-const { HashTagPlus, hashTagPlusSchema } = require("../models/hashTagPlus");
+const { HashTagPlus, hashTagPlusSchema, amountSchema } = require("../models/hashTagPlus");
 const { User } = require("../models/user");
 const { DateTime } = require("luxon");
 const Joi = require("joi");
@@ -19,6 +19,7 @@ exports.getTags = async (req, res) => {
   }
 
   const hashTags = await HashTagPlus.find({})
+    .sort({_id: -1})
     .skip((req.query.page - 1) * req.query.itemsPerPage)
     .limit(req.query.itemsPerPage);
 
@@ -82,3 +83,22 @@ exports.startHashTagPlus = async (req, res) => {
 
   return res.status(200).send(hashTagPlus);
 };
+
+exports.addAmountToTag = async (req, res) => { 
+  try{ 
+    req.body = await amountSchema.validateAsync(req.body, {abortEarly: false}); 
+  }catch(error){
+    return res.status(400).send(error.details); 
+  }
+  
+  let hashTagPlus = await HashTagPlus.findOne({text: req.body.text}); 
+
+  if(!hashTagPlus)
+    return res.status(400).send(`No tag found: ${req.body.text}`); 
+
+  hashTagPlus.amount += req.body.amount; 
+
+  await hashTagPlus.save(); 
+
+  return res.status(200).send(hashTagPlus); 
+}; 

@@ -206,13 +206,11 @@ exports.unfollowUser = async (req, res) => {
   if (!currentUser.following.includes(req.params.id))
     return res.status(400).send("You are not following this user.");
 
-  currentUser.following = currentUser.following.filter(
-    id => id !== req.params.id
-  );
-  user.followers = user.followers.filter(id => id !== req.user._id);
-
-  await currentUser.save();
-  await user.save();
+  currentUser.following = currentUser.following.filter(v => v != req.params.id); 
+  user.followers = user.followers.filter(v => v != req.user._id); 
+  
+  await currentUser.save(); 
+  await user.save(); 
 
   return res.status(200).send("You are no longer following this user.");
 };

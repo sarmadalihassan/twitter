@@ -431,3 +431,15 @@ undefined
     at /home/sarmad/Documents/Twitter/node_modules/mongoose/lib/document.js:2842:17
     at /home/sarmad/Documents/Twitter/node_modules/mongoose/lib/schematype.js:1349:9
     at processTicksAndRejections (node:internal/process/task_queues:78:11)
+2022-09-30 13:52:34 [Twitter] error: TypeError: hashTagPlus.save is not a function
+    at exports.addAmountToTag (/home/sarmad/Documents/Twitter/controllers/hashTagPlus.js:98:21)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+2022-09-30 13:53:55 [Twitter] error: TypeError: hashTagPlus.save is not a function
+    at exports.addAmountToTag (/home/sarmad/Documents/Twitter/controllers/hashTagPlus.js:101:21)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+2022-09-30 13:53:58 [Twitter] error: TypeError: hashTagPlus.save is not a function
+    at exports.addAmountToTag (/home/sarmad/Documents/Twitter/controllers/hashTagPlus.js:101:21)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+2022-09-30 13:54:37 [Twitter] error: TypeError: hashTagPlus.save is not a function
+    at exports.addAmountToTag (/home/sarmad/Documents/Twitter/controllers/hashTagPlus.js:102:21)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)

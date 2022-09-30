@@ -1,11 +1,11 @@
 This is a NodeJS backend server for the twitter blockchain app.
 
-#Features 
+# Features 
  1. You can repost a tweet and donate ether to the original poster 
  2. You can donate ether to a hashtag which will eventually go to a particular address(example charity)
 
 
-#Technical Features 
+# Technical Features 
  1. Uses clustering to improve performance
  2. Uses redis to cache frequent requests
  3. Uses Cloudinary CDN for media
@@ -14,10 +14,10 @@ This is a NodeJS backend server for the twitter blockchain app.
  6. Winston for loggin 
  7. Node-Cron to expire funds donated to a hashtag+ 
  8. Works internationally, handles every timezone. So an expiry date set by a person in EST takes effect 
-    in EST time.
+    in EST.
 
-#Deployed At heroku  
-- https://twitterblockchain.herokuapp.com
+## Deployed At heroku  
+https://twitterblockchain.herokuapp.com
 
-#API Documentation 
+## API Documentation 
 [Postman API documentation](https://documenter.getpostman.com/view/23158890/2s7YSMZtVL)

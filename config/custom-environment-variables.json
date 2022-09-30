@@ -10,6 +10,11 @@
       },
       "deployerKey": "app_contract_deployer_key",
       "infuraAPIKey": "app_infura_api_key"
+    },
+    "CDN": {
+      "cloudName": "app_cdn_cloud_name",
+      "apiKey": "app_cdn_api_key",
+      "apiSecret": "app_cdn_api_secret"
     }
   }
   

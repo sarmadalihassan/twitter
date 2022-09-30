@@ -1,10 +1,11 @@
 const cloudinary = require("cloudinary").v2;
 const fs = require('fs'); 
+const config = require('config'); 
 
 cloudinary.config({
-  cloud_name: "diojvu8jg",
-  api_key: "889718377261386",
-  api_secret: "l5ds1jqpxqFPvbWlVjpSj9JRNis"
+  cloud_name: `${config.get('CDN.cloudName')}`,
+  api_key: `${config.get('CDN.apiKey')}`,
+  api_secret: `${config.get('CDN.apiSecret')}`
 });
 
 async function uploadToCloudinary(locaFilePath) {

@@ -12,11 +12,11 @@ router.get("/suggestions", auth, userController.whoToFollow);
 
 router.post("/unfollow/:id", auth, userController.unfollowUser);
 router.post("/follow/:id", auth, userController.followUser);
+router.put("/wallet", auth, userController.editWalletAddress); 
 
 router.get("/:id", auth, userController.getUser);
 router.put("/:id", auth, userController.editUser);
 
-router.put("/wallet", auth, userController.editWalletAddress); 
 
 router.delete("/:id", auth, userController.deleteUser); 
 

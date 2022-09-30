@@ -3,7 +3,8 @@ const {
   userSchema,
   loginSchema,
   editUserSchema,
-  usernameSchema
+  usernameSchema,
+  walletAddressSchema
 } = require("../models/user");
 const bcrypt = require("bcrypt");
 const _ = require("lodash");
@@ -319,6 +320,22 @@ exports.whoToFollow = async (req, res) => {
 
   return res.status(200).send(users);
 };
+
+exports.editWalletAddress = async (req, res) => {
+  try{
+    req.body = await walletAddressSchema.validateAsync(req.body, {abortEarly: false}); 
+  }catch(error){
+    return res.status(400).send(error.details); s
+  }
+
+  let user = await User.findById(req.user._id); 
+
+  user.walletAddress = req.body.walletAddress; 
+
+  await user.save(); 
+
+  return res.status(200).send('Updated Address'); 
+}
 
 exports.deleteUser = async (req, res) => {
   //user can only delete itself.

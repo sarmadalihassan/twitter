@@ -16,4 +16,6 @@ router.post("/follow/:id", auth, userController.followUser);
 router.get("/:id", auth, userController.getUser);
 router.put("/:id", auth, userController.editUser);
 
+router.put("/wallet", auth, userController.editWalletAddress); 
+
 module.exports = router;

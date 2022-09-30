@@ -93,17 +93,22 @@ const joiUsernameSchema = Joi.object({
   username: Joi.string().min(3).max(64).required().trim()
 });
 
-const JoiEditUserSchema = Joi.object({
+const joiEditUserSchema = Joi.object({
   name: Joi.string().min(1).max(55).lowercase(),
   email: Joi.string().email(),
   password: Joi.string().min(8).max(256),
   username: Joi.string().min(3).max(64)
 });
 
+const joiWalletAddressSchema = Joi.object({
+  walletAddress: Joi.string().min(16)
+}); 
+
 module.exports = {
   userSchema: joiUserSchema,
   User: mongoose.model("User", userSchema),
   loginSchema: joiLoginSchema,
-  editUserSchema: JoiEditUserSchema,
-  usernameSchema: joiUsernameSchema
+  editUserSchema: joiEditUserSchema,
+  usernameSchema: joiUsernameSchema,
+  walletAddressSchema: joiWalletAddressSchema
 };

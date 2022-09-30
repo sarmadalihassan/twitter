@@ -19,7 +19,7 @@ exports.getTags = async (req, res) => {
   }
 
   const hashTags = await HashTagPlus.find({})
-    .sort({_id: -1})
+    .sort({amount: -1})
     .skip((req.query.page - 1) * req.query.itemsPerPage)
     .limit(req.query.itemsPerPage);
 

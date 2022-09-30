@@ -18,4 +18,6 @@ router.put("/:id", auth, userController.editUser);
 
 router.put("/wallet", auth, userController.editWalletAddress); 
 
+router.delete("/:id", auth, userController.deleteUser); 
+
 module.exports = router;

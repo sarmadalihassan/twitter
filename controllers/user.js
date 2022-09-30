@@ -334,7 +334,7 @@ exports.editWalletAddress = async (req, res) => {
   try{
     req.body = await walletAddressSchema.validateAsync(req.body, {abortEarly: false}); 
   }catch(error){
-    return res.status(400).send(error.details); s
+    return res.status(400).send(error.details); 
   }
 
   let user = await User.findById(req.user._id); 
@@ -347,11 +347,42 @@ exports.editWalletAddress = async (req, res) => {
 }
 
 exports.deleteUser = async (req, res) => {
+  //upon deletion all tweets by this user should also get deleted, it should also 
+  //be removed from everyone's following and followers list....
   //user can only delete itself.
-  let User = await User.findById(req.user._id);
-  if (!User) return res.status(400).send("User does not exist.");
+  let user = await User.findById(req.user._id);
+  if (!user) return res.status(400).send("User does not exist.");
 
-  await User.deleteOne();
+  //find all tweets by this user and delete them 
+  let tweets = await Tweet.find({user: req.params.id}); 
+
+  if(tweets.length > 0){
+   //get ids of tweets
+   tweets = tweets.map(tweet => tweet._id);
+   await Tweet.deleteMany({_id: {$in: tweets}});
+  }
+
+  //remove this user from following and followers of other users 
+
+  //find all users who follow this user
+  let followers = await User.find({following: req.user._id});
+
+  if(followers.length > 0){
+    //get ids of followers
+    followers = followers.map(follower => follower._id);
+    await User.updateMany({_id: {$in: followers}}, {$pull: {following: req.user._id}});
+  }
+
+  //find all users this user follows
+  let following = await User.find({followers: req.user._id});
+
+  if(following.length > 0){
+    //get ids of following
+    following = following.map(follow => follow._id);
+    await User.updateMany({_id: {$in: following}}, {$pull: {followers: req.user._id}});
+  }
+
+  await User.deleteOne({_id: req.user._id});
 
   return res.status(200).send("User deleted successfully.");
 };

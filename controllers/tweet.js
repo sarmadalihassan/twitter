@@ -149,3 +149,22 @@ exports.getTrends = async (req, res) => {
 
   return res.status(200).send(trending); 
 };
+
+exports.deleteTweet = async(req, res) => {
+  if(!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(400).send(`Invalid objectId:${req.params.id}`); 
+
+  let tweet = await Tweet.findById(req.params.id); 
+  if(!tweet)
+    return res.status(400).send(`No tweet found with id:${req.params.id}`); 
+
+  await Tweet.deleteOne({_id: req.params.id});
+
+  //also delete tweet's reference from it's original poster 
+
+  let user = await User.findById(tweet.user);
+  user.tweets = user.tweets.filter(v => v != req.params.id);
+  await user.save();
+
+  res.status(200).send(`Tweet deleted successfully.`); 
+}

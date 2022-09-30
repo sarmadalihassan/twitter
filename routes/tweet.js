@@ -20,4 +20,6 @@ router.get("/:id", auth, tweetController.getTweet);
 
 router.post("/:id", auth, tweetController.postTweetReply);
 
+router.delete("/:id", auth, tweetController.deleteTweet);
+
 module.exports = router;

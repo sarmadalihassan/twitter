@@ -11,6 +11,8 @@ const _ = require("lodash");
 const { DateTime } = require("luxon");
 const mongoose = require("mongoose");
 const { Tweet } = require("../models/tweet");
+const {uploadToCloudinary} = require('../util/cloudinary');
+
 
 exports.signUp = async (req, res) => {
   try {
@@ -35,6 +37,10 @@ exports.signUp = async (req, res) => {
 
   user.joiningDate = DateTime.now().toISO();
 
+  if(req.file) {
+    let res = await uploadToCloudinary(req.file.path); 
+    if(res) user.profilePicture = res.url; 
+  }
   await user.save();
 
   const token = user.generateAuthToken();
@@ -91,6 +97,7 @@ exports.getUser = async (req, res) => {
     newUser.walletAddress = null; 
     newUser.email = null; 
 
+    return res.status(200).send(newUser); 
   }
   //public profile case and following this user by currentuser case
   return res.status(200).send(user);
@@ -316,6 +323,8 @@ exports.whoToFollow = async (req, res) => {
       .select({ _id: 1, name: 1, userName: 1, profilePicture: 1 })
       .sort({ _id: -1 })
       .limit(5);
+
+    users = users.filter(v => !currentUser.following.includes(v._id));
   }
 
   return res.status(200).send(users);

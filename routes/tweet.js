@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
 const tweetController = require("../controllers/tweet");
+const upload = require('../middleware/multer'); 
 
-router.post("/", auth, tweetController.postTweet);
+router.post("/", auth, upload.single('media'), tweetController.postTweet);
 
 router.get("/", auth, tweetController.getHomePage);
 

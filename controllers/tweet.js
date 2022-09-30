@@ -2,6 +2,7 @@ const { Tweet, tweetSchema, replySchema } = require("../models/tweet");
 const { User } = require("../models/user");
 const mongoose = require("mongoose");
 const { DateTime } = require("luxon");
+const {uploadToCloudinary} = require('../util/cloudinary'); 
 
 exports.postTweet = async (req, res) => {
   try {
@@ -22,7 +23,16 @@ exports.postTweet = async (req, res) => {
 
   tweet.mentioned = [...mentioned];
 
+  if(req.file){
+    const res = await uploadToCloudinary(req.file.path); 
+
+    if(res) tweet.media = res.url; 
+  }
+
   await tweet.save();
+  let user = await User.findById(req.user._id); 
+  user.tweets.push(tweet._id); 
+  await user.save(); 
 
   return res.status(200).send(tweet);
 };

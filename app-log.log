@@ -443,3 +443,31 @@ undefined
 2022-09-30 13:54:37 [Twitter] error: TypeError: hashTagPlus.save is not a function
     at exports.addAmountToTag (/home/sarmad/Documents/Twitter/controllers/hashTagPlus.js:102:21)
     at processTicksAndRejections (node:internal/process/task_queues:96:5)
+2022-10-01 00:09:02 [Twitter] error: ValidationError: HashTagPlus validation failed: description: Path `description` is required., timezone: Path `timezone` is required.
+    at model.Document.invalidate (/home/sarmad/Documents/Twitter/node_modules/mongoose/lib/document.js:3054:32)
+    at /home/sarmad/Documents/Twitter/node_modules/mongoose/lib/document.js:2842:17
+    at /home/sarmad/Documents/Twitter/node_modules/mongoose/lib/schematype.js:1349:9
+    at processTicksAndRejections (node:internal/process/task_queues:78:11)
+2022-10-01 01:06:21 [Twitter] error: MulterError: Unexpected field
+    at wrappedFileFilter (/home/sarmad/Documents/Twitter/node_modules/multer/index.js:40:19)
+    at Multipart.<anonymous> (/home/sarmad/Documents/Twitter/node_modules/multer/lib/make-middleware.js:107:7)
+    at Multipart.emit (node:events:527:28)
+    at HeaderParser.cb (/home/sarmad/Documents/Twitter/node_modules/busboy/lib/types/multipart.js:358:14)
+    at HeaderParser.push (/home/sarmad/Documents/Twitter/node_modules/busboy/lib/types/multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (/home/sarmad/Documents/Twitter/node_modules/busboy/lib/types/multipart.js:394:37)
+    at feed (/home/sarmad/Documents/Twitter/node_modules/busboy/node_modules/streamsearch/lib/sbmh.js:219:14)
+    at SBMH.push (/home/sarmad/Documents/Twitter/node_modules/busboy/node_modules/streamsearch/lib/sbmh.js:104:16)
+    at Multipart._write (/home/sarmad/Documents/Twitter/node_modules/busboy/lib/types/multipart.js:567:19)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+2022-10-01 01:09:44 [Twitter] error: MulterError: Unexpected field
+    at wrappedFileFilter (/home/sarmad/Documents/Twitter/node_modules/multer/index.js:40:19)
+    at Multipart.<anonymous> (/home/sarmad/Documents/Twitter/node_modules/multer/lib/make-middleware.js:107:7)
+    at Multipart.emit (node:events:527:28)
+    at HeaderParser.cb (/home/sarmad/Documents/Twitter/node_modules/busboy/lib/types/multipart.js:358:14)
+    at HeaderParser.push (/home/sarmad/Documents/Twitter/node_modules/busboy/lib/types/multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (/home/sarmad/Documents/Twitter/node_modules/busboy/lib/types/multipart.js:394:37)
+    at feed (/home/sarmad/Documents/Twitter/node_modules/busboy/node_modules/streamsearch/lib/sbmh.js:200:10)
+    at SBMH.push (/home/sarmad/Documents/Twitter/node_modules/busboy/node_modules/streamsearch/lib/sbmh.js:104:16)
+    at Multipart._write (/home/sarmad/Documents/Twitter/node_modules/busboy/lib/types/multipart.js:567:19)
+    at writeOrBuffer (node:internal/streams/writable:389:12)
+2022-10-01 01:11:09 [Twitter] error: Error: ENOENT: no such file or directory, open 'uploads/social-media-twitter-logo-blue-isolated-free-vector.jpg'

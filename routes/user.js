@@ -2,9 +2,9 @@ const userController = require("../controllers/user");
 const express = require("express");
 const router = express.Router();
 const auth = require("../middleware/auth");
-// const isAdmin = require("../middleware/admin.js");
+const upload = require('../middleware/multer'); 
 
-router.post("/signup", userController.signUp);
+router.post("/signup", upload.single('profilePicture'), userController.signUp);
 
 router.post("/login", userController.loginUser);
 

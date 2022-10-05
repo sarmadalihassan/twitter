@@ -2,7 +2,7 @@ const { Tweet, tweetSchema, replySchema } = require("../models/tweet");
 const { User } = require("../models/user");
 const mongoose = require("mongoose");
 const { DateTime } = require("luxon");
-const {uploadToCloudinary} = require('../util/cloudinary'); 
+const { uploadToCloudinary } = require("../util/cloudinary");
 
 exports.postTweet = async (req, res) => {
   try {
@@ -23,16 +23,16 @@ exports.postTweet = async (req, res) => {
 
   tweet.mentioned = [...mentioned];
 
-  if(req.file){
-    const res = await uploadToCloudinary(req.file.path); 
+  if (req.file) {
+    const res = await uploadToCloudinary(req.file.path);
 
-    if(res) tweet.media = res.url; 
+    if (res) tweet.media = res.url;
   }
 
   await tweet.save();
-  let user = await User.findById(req.user._id); 
-  user.tweets.push(tweet._id); 
-  await user.save(); 
+  let user = await User.findById(req.user._id);
+  user.tweets.push(tweet._id);
+  await user.save();
 
   return res.status(200).send(tweet);
 };
@@ -139,32 +139,34 @@ exports.repostTweet = async (req, res) => {
 
 exports.getTrends = async (req, res) => {
   let trending = await Tweet.aggregate([
-  {$limit:10000},
-  {$match: {"hashTags.0": {"$exists": true}}},
-  {$unwind: "$hashTags"},
-  {$project: {"hashTags": 1, "_id": 0}},
-  {$group: {"_id": {$toLower: "$hashTags"}, count: {$sum: 1}}},
-  {$sort:{"count": -1}}, {$limit:10}
+    { $sort: { _id: -1 } },
+    { $limit: 10000 },
+    { $match: { "hashTags.0": { $exists: true } } },
+    { $unwind: "$hashTags" },
+    { $project: { hashTags: 1, _id: 0 } },
+    { $group: { _id: { $toLower: "$hashTags" }, count: { $sum: 1 } } },
+    { $sort: { count: -1 } },
+    { $limit: 10 }
   ]);
 
-  return res.status(200).send(trending); 
+  return res.status(200).send(trending);
 };
 
-exports.deleteTweet = async(req, res) => {
-  if(!mongoose.Types.ObjectId.isValid(req.params.id))
-    return res.status(400).send(`Invalid objectId:${req.params.id}`); 
+exports.deleteTweet = async (req, res) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(400).send(`Invalid objectId:${req.params.id}`);
 
-  let tweet = await Tweet.findById(req.params.id); 
-  if(!tweet)
-    return res.status(400).send(`No tweet found with id:${req.params.id}`); 
+  let tweet = await Tweet.findById(req.params.id);
+  if (!tweet)
+    return res.status(400).send(`No tweet found with id:${req.params.id}`);
 
-  await Tweet.deleteOne({_id: req.params.id});
+  await Tweet.deleteOne({ _id: req.params.id });
 
-  //also delete tweet's reference from it's original poster 
+  //also delete tweet's reference from it's original poster
 
   let user = await User.findById(tweet.user);
   user.tweets = user.tweets.filter(v => v != req.params.id);
   await user.save();
 
-  res.status(200).send(`Tweet deleted successfully.`); 
-}
+  res.status(200).send(`Tweet deleted successfully.`);
+};

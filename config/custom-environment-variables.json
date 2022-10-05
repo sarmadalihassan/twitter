@@ -9,7 +9,8 @@
         "address": "app_twitter_contract_address"
       },
       "deployerKey": "app_contract_deployer_key",
-      "infuraAPIKey": "app_infura_api_key"
+      "infuraAPIKey": "app_infura_api_key",
+      "mnemonic": "app_contract_mnemonic"
     },
     "CDN": {
       "cloudName": "app_cdn_cloud_name",

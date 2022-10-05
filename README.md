@@ -10,10 +10,9 @@ This is a NodeJS backend server for the twitter blockchain app.
  2. Uses redis to cache frequent requests
  3. Uses Cloudinary CDN for media
  4. Truffle with Infura for deploying contracts
- 5. Web3 to communicate with contracts
- 6. Winston for loggin 
- 7. Node-Cron to expire funds donated to a hashtag+ 
- 8. Works internationally, handles every timezone. So an expiry date set by a person in EST takes effect 
+ 5. Web3 to communicate with contracts 
+ 6. Node-Cron to expire funds donated to a hashtag+ 
+ 7. Works internationally, handles every timezone. So an expiry date set by a person in EST takes effect 
     in EST.
 
 ## Deployed At heroku  
